@@ -1,0 +1,348 @@
+[
+    {
+        "id": "edfb8d4e830b790a",
+        "type": "tab",
+        "label": "HTTP",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aa33bd72bba3c401",
+        "type": "http in",
+        "z": "edfb8d4e830b790a",
+        "name": "",
+        "url": "/dht11",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "08b18d2ecdc403bd",
+                "49c6bde09f9a2a52",
+                "806bf3a6a81ed04f"
+            ]
+        ]
+    },
+    {
+        "id": "110885d0e6e08a46",
+        "type": "debug",
+        "z": "edfb8d4e830b790a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "08b18d2ecdc403bd",
+        "type": "http response",
+        "z": "edfb8d4e830b790a",
+        "name": "response ok",
+        "statusCode": "200",
+        "headers": {},
+        "x": 730,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "49c6bde09f9a2a52",
+        "type": "function",
+        "z": "edfb8d4e830b790a",
+        "name": "function temp",
+        "func": "var temperature = msg.payload.temperature;\nmsg.payload = temperature;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 440,
+        "wires": [
+            [
+                "6fd2b9bbcc0adbe4"
+            ]
+        ]
+    },
+    {
+        "id": "6fd2b9bbcc0adbe4",
+        "type": "ui_chart",
+        "z": "edfb8d4e830b790a",
+        "name": "Temperature DTH11",
+        "group": "29022057243857be",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Température DHT11",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "No data received...",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1080,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "806bf3a6a81ed04f",
+        "type": "function",
+        "z": "edfb8d4e830b790a",
+        "name": "function humidity",
+        "func": "var humidity = msg.payload.humidity;\nmsg.payload = humidity;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 480,
+        "wires": [
+            [
+                "6f67c02bc6902856"
+            ]
+        ]
+    },
+    {
+        "id": "6f67c02bc6902856",
+        "type": "ui_chart",
+        "z": "edfb8d4e830b790a",
+        "name": "",
+        "group": "00b70d5e403b5ec0",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity DHT11",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1120,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "70f6a91bbe31d3ad",
+        "type": "ui_switch",
+        "z": "edfb8d4e830b790a",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "92dbbdf87999ec23",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 450,
+        "y": 780,
+        "wires": [
+            [
+                "46703c89d7127ba6"
+            ]
+        ]
+    },
+    {
+        "id": "c2cf2a127c043d6c",
+        "type": "debug",
+        "z": "edfb8d4e830b790a",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "2f8902489b82d274",
+        "type": "http response",
+        "z": "edfb8d4e830b790a",
+        "name": "response ledState",
+        "statusCode": "200",
+        "headers": {
+            "msg.payload": ""
+        },
+        "x": 1210,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "46703c89d7127ba6",
+        "type": "function",
+        "z": "edfb8d4e830b790a",
+        "name": "function 1",
+        "func": "global.set(\"led\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 840,
+        "wires": [
+            [
+                "c2cf2a127c043d6c"
+            ]
+        ]
+    },
+    {
+        "id": "5e6940870e4c274b",
+        "type": "function",
+        "z": "edfb8d4e830b790a",
+        "name": "function 2",
+        "func": "msg.payload = global.get(\"led\").toString();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 660,
+        "wires": [
+            [
+                "2f8902489b82d274",
+                "110885d0e6e08a46"
+            ]
+        ]
+    },
+    {
+        "id": "e88b6737946c471c",
+        "type": "http in",
+        "z": "edfb8d4e830b790a",
+        "name": "",
+        "url": "/ledState",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 850,
+        "y": 840,
+        "wires": [
+            [
+                "5e6940870e4c274b"
+            ]
+        ]
+    },
+    {
+        "id": "29022057243857be",
+        "type": "ui_group",
+        "name": "TP1 Temperature DHT11",
+        "tab": "fa391011e47b251a",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "00b70d5e403b5ec0",
+        "type": "ui_group",
+        "name": "TP1 Humidity DHT11",
+        "tab": "fa391011e47b251a",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "92dbbdf87999ec23",
+        "type": "ui_group",
+        "name": "controlLedESP32",
+        "tab": "fa391011e47b251a",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fa391011e47b251a",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
