@@ -51,5 +51,5 @@ void loop() {
       http.end();
     }
   }
-  //delay(1); // Attendre 10 secondes avant le prochain scan
+  delay(10000); // Attendre 10 secondes avant le prochain scan
 }
