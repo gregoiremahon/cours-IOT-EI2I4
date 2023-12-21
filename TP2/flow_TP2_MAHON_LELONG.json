@@ -1,0 +1,151 @@
+[
+    {
+        "id": "2528ab78ab02f90e",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8f074937c9b5c552",
+        "type": "http in",
+        "z": "2528ab78ab02f90e",
+        "name": "",
+        "url": "/wifi-data",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "aa2b3937d4dda3ad",
+                "4a2ddecbf2d19d57"
+            ]
+        ]
+    },
+    {
+        "id": "aa2b3937d4dda3ad",
+        "type": "http response",
+        "z": "2528ab78ab02f90e",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 380,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "61125f60ce532e99",
+        "type": "http request",
+        "z": "2528ab78ab02f90e",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "http://127.0.0.1:5000/get_location",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "9aba7c4cd8a3d60f"
+            ]
+        ]
+    },
+    {
+        "id": "4a2ddecbf2d19d57",
+        "type": "function",
+        "z": "2528ab78ab02f90e",
+        "name": "function 1",
+        "func": "let wifiData = msg.payload;\nflow.set(\"wifiData\", wifiData);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 340,
+        "wires": [
+            [
+                "66ac8d93e8ca350c"
+            ]
+        ]
+    },
+    {
+        "id": "66ac8d93e8ca350c",
+        "type": "function",
+        "z": "2528ab78ab02f90e",
+        "name": "function 2",
+        "func": "msg.payload = flow.get(\"wifiData\"); // ou msg.payload si les données sont déjà dans le payload\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 340,
+        "wires": [
+            [
+                "61125f60ce532e99"
+            ]
+        ]
+    },
+    {
+        "id": "43f354a3f5c9e5f9",
+        "type": "worldmap",
+        "z": "2528ab78ab02f90e",
+        "name": "POSITION ESP32",
+        "lat": "48.843580144444445",
+        "lon": "2.3566712444444446",
+        "zoom": "",
+        "layer": "OSMC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1150,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9aba7c4cd8a3d60f",
+        "type": "json",
+        "z": "2528ab78ab02f90e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 930,
+        "y": 340,
+        "wires": [
+            [
+                "43f354a3f5c9e5f9"
+            ]
+        ]
+    }
+]
