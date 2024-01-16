@@ -1,15 +1,24 @@
+/*
+  Fichier : get_wifis_ESP32.ino
+  Description : Scanne les réseaux Wi-Fi et envoie les données au serveur Node-RED via une requête HTTP POST.
+  Auteurs : Grégoire MAHON, Armand LELONG
+*/
+
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char* ssid = "gregsiphone";
-const char* password = "gregwifi";
+// Identifiants du réseau WiFi
+const char* ssid = "VOTRE SSID";
+const char* password = "MOT DE PASSE";
 
+// Adresse du serveur Node-RED
 const char* serverName = "http://172.20.10.3:1880/wifi-data";
 
 void setup() {
-  Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  Serial.begin(115200);          // Initialisation du port série
+  WiFi.begin(ssid, password);    // Connexion au réseau WiFi
 
+  // Attente de la connexion
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Connecting to WiFi...");
@@ -18,13 +27,11 @@ void setup() {
 }
 
 void loop() {
-  // Scan for WiFi networks
-  int n = WiFi.scanNetworks();
+  int n = WiFi.scanNetworks();   // Scanne les réseaux Wi-Fi disponibles
   if (n == 0) {
     Serial.println("No networks found");
   } else {
-    // Création du JSON
-    String jsonData = "[";
+    String jsonData = "[";       // Préparation du JSON pour envoyer les données (pourrait être fait avec une librairie JSON beaucoup plus facilement...)
     for (int i = 0; i < n; ++i) {
       if (i > 0) {
         jsonData += ",";
@@ -32,7 +39,8 @@ void loop() {
       jsonData += "{\"ssid\":\"" + WiFi.SSID(i) + "\", \"rssi\":" + WiFi.RSSI(i) + ", \"bssid\":\"" + WiFi.BSSIDstr(i) + "\"}";
     }
     jsonData += "]";
-    // Envoi des données à Node-RED
+    
+    // Envoi des données au serveur Node-RED
     if (WiFi.status() == WL_CONNECTED) {
       HTTPClient http;
       http.begin(serverName);
@@ -51,5 +59,5 @@ void loop() {
       http.end();
     }
   }
-  delay(10000); // Attendre 10 secondes avant le prochain scan
+  delay(10000); // Attente de 10 secondes avant le prochain scan
 }

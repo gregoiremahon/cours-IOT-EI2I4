@@ -1,3 +1,10 @@
+"""
+Fichier : database.py
+-> Créer la base de données SQLite et charger les données depuis un fichier CSV.
+Auteurs : Grégoire MAHON, Armand LELONG
+Promo EI2I 4 II Groupe B
+"""
+
 import sqlite3
 import csv
 
